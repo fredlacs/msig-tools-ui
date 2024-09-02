@@ -1,14 +1,15 @@
 'use client'
 
-import { ChangeEvent, useRef } from 'react'
-import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi'
+import { ChangeEvent, useRef } from 'react';
+import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi';
 
 function App() {
-  const account = useAccount()
-  const signer = useSignMessage()
-  const { connectors, connect, status, error } = useConnect()
-  const { disconnect } = useDisconnect()
-  const textRef = useRef("")
+  const account = useAccount();
+  const signer = useSignMessage();
+  const { connectors, connect, status, error } = useConnect();
+  const { disconnect } = useDisconnect();
+  const textRef = useRef('');
+  const signatureRef = useRef(null);
 
   function handleInputChange(ev: ChangeEvent<HTMLInputElement>): void {
     textRef.current = ev.target.value;
@@ -16,14 +17,20 @@ function App() {
 
   function handleSignClick(): void {
     const text = textRef.current;
-    signer.signMessage({  message: text })
+    signer.signMessage({ message: text });
+  }
+
+  function handleCopyClick(): void {
+    if (signatureRef.current) {
+      signatureRef.current.select();
+      document.execCommand('copy');
+    }
   }
 
   return (
     <div className="container">
       <div>
         <h2>Account</h2>
-
         <div>
           <strong>Status:</strong> {account.status}
           <br />
@@ -62,21 +69,25 @@ function App() {
             onChange={handleInputChange}
             placeholder="Enter message to sign"
           />
-          <button onClick={handleSignClick}>
-            Sign message
-          </button>
+          <button onClick={handleSignClick}>Sign message</button>
+
           {signer.data && (
-            <div>
-              <h3>Signature Hash</h3>
-              <a href="#">
-                {signer.data}
-              </a>
+            <div className="copy-container">
+              <input
+                className="copy-input"
+                ref={signatureRef}
+                value={signer.data}
+                readOnly
+              />
+              <button className="copy-button" onClick={handleCopyClick}>
+                Copy
+              </button>
             </div>
           )}
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
