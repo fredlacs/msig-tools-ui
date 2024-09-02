@@ -75,7 +75,7 @@ function App() {
                 value={signer.data}
                 readOnly
               />
-              <button className="copy-button" onClick={handleCopyClick(signer.data)}>
+              <button className="copy-button" onClick={() => handleCopyClick(signer.data)}>
                 Copy
               </button>
             </div>
