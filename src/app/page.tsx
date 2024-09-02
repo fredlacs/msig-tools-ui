@@ -20,11 +20,8 @@ function App() {
     signer.signMessage({ message: text });
   }
 
-  function handleCopyClick(): void {
-    if (signatureRef.current) {
-      signatureRef.current.select();
-      document.execCommand('copy');
-    }
+  function handleCopyClick(val: string): void {
+    navigator.clipboard.writeText(val)
   }
 
   return (
@@ -75,11 +72,10 @@ function App() {
             <div className="copy-container">
               <input
                 className="copy-input"
-                ref={signatureRef}
                 value={signer.data}
                 readOnly
               />
-              <button className="copy-button" onClick={handleCopyClick}>
+              <button className="copy-button" onClick={handleCopyClick(signer.data)}>
                 Copy
               </button>
             </div>
