@@ -1,7 +1,7 @@
 'use client'
 
 import { ChangeEvent, useRef } from 'react'
-import { useAccount, useConnect, useDisconnect, useSignMessage, useSignTypedData } from 'wagmi'
+import { useAccount, useConnect, useDisconnect, useSignMessage } from 'wagmi'
 
 function App() {
   const account = useAccount()
@@ -14,23 +14,22 @@ function App() {
     textRef.current = ev.target.value;
   }
 
-
   function handleSignClick(): void {
     const text = textRef.current;
     signer.signMessage({  message: text })
   }
 
   return (
-    <>
+    <div className="container">
       <div>
         <h2>Account</h2>
 
         <div>
-          status: {account.status}
+          <strong>Status:</strong> {account.status}
           <br />
-          addresses: {JSON.stringify(account.addresses)}
+          <strong>Addresses:</strong> {JSON.stringify(account.addresses)}
           <br />
-          chainId: {account.chainId}
+          <strong>ChainId:</strong> {account.chainId}
         </div>
 
         {account.status === 'connected' && (
@@ -52,35 +51,31 @@ function App() {
           </button>
         ))}
         <div>{status}</div>
-        <div>{error?.message}</div>
+        {error && <div style={{ color: 'red' }}>{error.message}</div>}
       </div>
 
-      <div>
-        {account.status === 'connected' && (
-          <div>
+      {account.status === 'connected' && (
+        <div>
+          <h2>Sign Message</h2>
           <input
-          onChange={((ev) => handleInputChange(ev))}
-           />
-          <button
-            onClick={() => handleSignClick()}
-          >
+            type="text"
+            onChange={handleInputChange}
+            placeholder="Enter message to sign"
+          />
+          <button onClick={handleSignClick}>
             Sign message
           </button>
-            {signer.data && (
-          <div>
-              <h2>
-                Signature hash
-              </h2>
-              <a>
+          {signer.data && (
+            <div>
+              <h3>Signature Hash</h3>
+              <a href="#">
                 {signer.data}
               </a>
-          </div>
-            )}
-
-          </div>
-        )}
-      </div>
-    </>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   )
 }
 
