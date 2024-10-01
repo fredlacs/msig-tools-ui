@@ -20,10 +20,6 @@ const AccountAccordion: React.FC = () => {
     signer.signMessage({ message: text });
   }
 
-  function handleCopyClick(val: string): void {
-    navigator.clipboard.writeText(val)
-  }
-
   return (
     <div className="container">
       <div>

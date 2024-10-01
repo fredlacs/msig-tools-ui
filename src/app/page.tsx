@@ -3,6 +3,7 @@
 import { Accordion as BootstrapAccordion } from 'react-bootstrap';
 import { ReactNode } from 'react';
 import SignMessage from '../components/SignMessage';
+import VerifySig from "../components/VerifySignature";
 
 interface AccordionProps {
   title: string;
@@ -31,6 +32,10 @@ function App() {
 
       <Accordion title="Sign message" eventKey="0">
         <SignMessage />
+      </Accordion>
+
+      <Accordion title="Verify signed message" eventKey="1">
+        <VerifySig />
       </Accordion>
 
     </div>
