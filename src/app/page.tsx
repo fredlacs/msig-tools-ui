@@ -38,6 +38,10 @@ function App() {
         <VerifySig />
       </Accordion>
 
+      <Accordion title="Verify SAFE / ledger message hash" eventKey="1">
+        <div className="container">TODO</div>
+      </Accordion>
+
     </div>
   );
 }
