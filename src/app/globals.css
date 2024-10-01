@@ -1,3 +1,5 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
 :root {
   background-color: #181818;
   color: rgba(255, 255, 255, 0.87);
@@ -17,6 +19,10 @@
     background-color: #f8f8f8;
     color: #181818;
   }
+}
+
+div {
+  color: #ffffff;
 }
 
 body {
@@ -39,7 +45,8 @@ body {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-h2, h3 {
+h2,
+h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -60,7 +67,9 @@ button:hover {
   background-color: #3700b3;
 }
 
-input[type="text"], input[type="email"], textarea {
+input[type="text"],
+input[type="email"],
+textarea {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
@@ -78,7 +87,12 @@ input[type="text"], input[type="email"], textarea {
   gap: 0.5rem;
 }
 
-input.copy-input {
+
+button.copy-button:hover {
+  background-color: #7f39fb;
+}
+
+.copy-input {
   flex: 1;
   padding: 0.5rem;
   font-size: 0.9rem;
@@ -88,15 +102,20 @@ input.copy-input {
   border-radius: 4px;
 }
 
-button.copy-button {
+.copy-button {
   padding: 0.5rem 1rem;
   background-color: #bb86fc;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  color: #ffffff;
 }
 
-button.copy-button:hover {
+.copy-button:hover {
+  background-color: #7f39fb;
+}
+
+.copy-button:active {
   background-color: #7f39fb;
 }
